@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<style>
+            .outerDiv {
+                background-color: #eaf0f3;
+                color: #fff;
+
+                width: 100%;
+                margin: 1px auto;
+                padding: 1px;
+            }
+            .leftDiv {
+                background-color: #eaf0f3;
+                color: #000;
+
+                width: 60%;
+                float: left;
+            }
+            .rightDiv {
+                background-color: #eaf0f3;
+                color: #000;
+
+                width: 40%;
+                float: right;
+            }
+
+</style>
+<div class="outerDiv">
+    <div class="leftDiv">
+        <div>
+            <img src="static/images/career.png" height="250" width="500">
+        </div>
+        <div>
+            <span style="font-size: 30px; font-weight: bold; font-family: cursive; color: red;">Confused</span>
+            <span style="font-size: 20px; font-family: cursive; font-weight: bold;"> about career choice???</span></br></br>
+            <span style="font-size: 25px; font-family: cursive; font-weight: bold;">Get GUIDANCE from AI</span>
+        </div>
+    </div>
+    <div class="rightDiv">
+        <form method="POST">
+            <div align="center" style="border: 1px solid black; margin: 10px; padding: 30px">
+                <h3 align="center">Please Sign In</h3>
+                <div class="form-group">
+                    <label for="email" style="float:left;">Email Address</label>
+                    <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email"
+                            style="width: 100%; border: 1px solid #b3aaaa"
+                    />
+
+                </div>
+                <div class="form-group">
+                    <label for="password" style="float:left;">Password</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="Enter password"
+                            style="width: 100%; border: 1px solid #b3aaaa"
+                    />
+                </div>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <br/>
+            </div>
+        </form>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+{% endblock %}
