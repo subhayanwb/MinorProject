@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<style>
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+</style>
+<form method="POST">
+    <div align="center" style="border: 1px solid black; margin: 1px; padding: 10px;
+                                margin-left: 25%; width: 50%; background-color: #eaf0f3;">
+        <h3 align="center">Sign Up</h3>
+        <p>Please fill in this form to create an account.</p>
+        <div class="form-group">
+        <label for="email" style="float:left;">Email</label>
+        <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                style="width: 100%; border: 1px solid #b3aaaa"
+                required
+        />
+        </div>
+        <div class="form-group">
+        <label for="password" style="float:left;">Password</label>
+        <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                style="width: 100%; border: 1px solid #b3aaaa"
+                required
+        />
+        </div>
+        <div class="form-group">
+        <label for="psw-repeat" style="float:left;">Repeat Password</label>
+        <input
+                type="password"
+                class="form-control"
+                id="psw-repeat"
+                name="psw-repeat"
+                placeholder="Repeat Password"
+                style="width: 100%; border: 1px solid #b3aaaa"
+                required
+        />
+        </div>
+        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+        <button type="submit" class="registerbtn">Sign Up</button>
+        <div class="container signin">
+            <p>Already have an account? <a href="/login">Sign in</a>.</p>
+        </div>
+    </div>
+</form>
+{% endblock %}
