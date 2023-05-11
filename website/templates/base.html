@@ -11,16 +11,18 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-  <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark" style="background-color: #2a5b8b; height: 60px;">
+  <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark" style="background-color: #2a5b8b; height: 45px;">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-          <img src="/static/images/Logo.png" height="50" width="60">
-          <span style="margin-left: 20px; font-style: italic; font-size: xx-large; color: #a9b0da;">Career Guide</span>
+          <img src="/static/images/Logo.png" height="30" width="40">
+          <span style="margin-left: 20px; font-style: italic; font-size: x-large; color: #a9b0da;">Career Guide</span>
       </a>
     </div>
 
@@ -36,6 +38,7 @@
           <a class="nav-item nav-link" id="login" href="/login">
               <span class="glyphicon glyphicon-user"></span>
                     <button type="button" class="btn btn-primary">Sign In</button>
+
           </a>
           <a class="nav-item nav-link" id="signUp" href="/signup">
               <span class="glyphicon glyphicon-user"></span>

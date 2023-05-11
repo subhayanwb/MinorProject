@@ -64,9 +64,39 @@
 
 
 </style>
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header" align="center">
+          <h4 class="modal-title">Upload File</h4>
+        </div>
+        <div class="modal-body">
+          <form enctype = "multipart/form-data" action = "/uploadfile" method = "post">
+            <input type = "file" name = "filename" required /><br><br>
+            <p> <input type = "submit" class="btn btn-primary btn-sm" value = "Upload Now" onclick="move()"/> </p>
+              <div class="w3-light-grey">
+            <div id="myBar" class="w3-green" style="height:24px;width:0"></div>
+          </div>
+          <br>
+        </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <form method="POST" name="RegistrationForm" id="RegistrationForm">
     <input type="hidden" id="userid" name="userid" value="{{ user.userId }}">
-    <h3 align="center">Registration</h3> <h5 align="right"><a href="">Click here</a> to upload your Resume for Registration</h5>
+    <h3 align="center">Registration</h3>
+    <h5 align="right">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Click Here</button>
+    to upload your Resume for Registration</h5>
     <div class="accordion">Personal Information</div>
     <div class="panel" style="border-bottom: 1px solid black;">
         <div class="outerDiv">
@@ -412,6 +442,20 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
+function move() {
+  var elem = document.getElementById("myBar");
+  var width = 1;
+  var id = setInterval(frame, 200);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+}
+</script>
 
 
 </script>

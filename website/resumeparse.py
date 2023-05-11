@@ -195,6 +195,7 @@ class resumeparse(object):
     def convert_docx_to_txt(docx_file, docx_parser):
         """
             A utility function to convert a Microsoft docx files to raw text.
+
             This code is largely borrowed from existing solutions, and does not match the style of the rest of this repo.
             :param docx_file: docx file with gets uploaded by the user
             :type docx_file: InMemoryUploadedFile
@@ -221,7 +222,7 @@ class resumeparse(object):
             elif docx_parser == "docx2txt":
                 text = docx2txt.process(docx_file)
             else:
-                logging.error('Choose docx_parser from tika or docx2txt :: ' + str(e) + ' is not supported')
+                #logging.error('Choose docx_parser from tika or docx2txt :: ' + str(e) + ' is not supported')
                 return [], " "
         except RuntimeError as e:
             logging.error('Error in tika installation:: ' + str(e))
@@ -245,6 +246,7 @@ class resumeparse(object):
     def convert_pdf_to_txt(pdf_file):
         """
         A utility function to convert a machine-readable PDF to raw text.
+
         This code is largely borrowed from existing solutions, and does not match the style of the rest of this repo.
         :param input_pdf_path: Path to the .pdf file which should be converted
         :type input_pdf_path: str

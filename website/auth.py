@@ -1,11 +1,14 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
+from werkzeug.utils import secure_filename
+
 from .models import User, UserPersonalInfo, CollegeMaster, QualificationMaster, UserEducationInfo, UserExperienceInfo, \
     UserCertificateInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db  ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
-
+import os
+from resume_parser import resumeparse
 auth = Blueprint('auth', __name__)
 
 
@@ -192,3 +195,14 @@ class RegistrationForm(Form):
     duration = StringField('duration')
     completionyear = StringField('completionyear')
 
+
+@auth.route('/uploadfile', methods=['GET', 'POST'])
+def uploadfile():
+    if request.method == 'POST':
+        f = request.files['filename']
+        f.save(secure_filename(f.filename))
+
+        data = resumeparse.read_file(f.filename)
+        flash(data, category='success')
+        flash('File Upload Successfull!', category='success')
+        return redirect(url_for('auth.register'))
