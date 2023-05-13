@@ -7,17 +7,90 @@ from flask_login import login_required, current_user
 from . import db
 import json
 
+from .auth import RegistrationForm
+from .models import UserPersonalInfo, UserEducationInfo, UserExperienceInfo, UserCertificateInfo
+
 views = Blueprint('views', __name__)
 
 
 @views.route('/', methods=['GET'])
 @login_required
 def home():
-    return render_template("home.html", user=current_user)
+    userPersonalInfo = UserPersonalInfo.query.filter_by(userid=current_user.userId).first()
+    userEducationInfo = UserEducationInfo.query.filter_by(userid=current_user.userId).first()
+    userExperienceInfo = UserExperienceInfo.query.filter_by(userid=current_user.userId).first()
+    userCertificateInfo = UserCertificateInfo.query.filter_by(userid=current_user.userId).first()
 
-@views.route('/rate', methods=['GET','POST'])
+    form = RegistrationForm()
+    if None != userPersonalInfo:
+        form.firstname = userPersonalInfo.firstname
+        form.lastname = userPersonalInfo.lastname
+        form.dob = userPersonalInfo.dob
+        form.contactnumber = userPersonalInfo.contactnumber
+        form.city = userPersonalInfo.city
+        form.state = userPersonalInfo.state
+        form.country = userPersonalInfo.country
+        form.pin = userPersonalInfo.pin
+        form.gender = userPersonalInfo.gender
+
+    else:
+        form.firstname = ""
+        form.lastname = ""
+        form.dob = ""
+        form.contactnumber = ""
+        form.city = ""
+        form.state = ""
+        form.country = ""
+        form.pin = ""
+        form.gender = ""
+
+    if None != userEducationInfo:
+        form.qualification = userEducationInfo.qualification
+        form.institute = userEducationInfo.college
+        form.yearofcompletion = userEducationInfo.yearofcompletion
+        form.grade = userEducationInfo.grade
+        form.rating = userEducationInfo.rating
+    else:
+        form.qualification = ""
+        form.institute = ""
+        form.yearofcompletion = ""
+        form.grade = ""
+        form.rating = ""
+
+    if None != userExperienceInfo:
+        form.organization = userExperienceInfo.organization
+        form.started = userExperienceInfo.started
+        form.ended = userExperienceInfo.ended
+        form.designation = userExperienceInfo.designation
+        form.skills = userExperienceInfo.skills
+    else:
+        form.organization = ""
+        form.started = ""
+        form.ended = ""
+        form.designation = ""
+        form.skills = ""
+
+    if None != userCertificateInfo:
+        form.certificatename = userCertificateInfo.certificatename
+        form.duration = userCertificateInfo.duration
+        form.completionyear = userCertificateInfo.completionyear
+    else:
+        form.certificatename = ""
+        form.duration = ""
+        form.completionyear = ""
+    return render_template("home.html", user=current_user, RegistrationForm=form)
+
+
+@views.route('/rateyourself', methods=['GET'])
 @login_required
-def rate():
+def rateyourself():
+    return render_template("index.html", user=current_user)
+
+
+
+@views.route('/predict', methods=['GET','POST'])
+@login_required
+def predict():
     if request.method == 'POST':
         result = request.form
         i = 0
@@ -89,4 +162,4 @@ def rate():
         print(data1)
         #return render_template("testafter.html", final_res=final_res, job_dict=jobs_dict, job0=data1)
         flash(final_res[0], category='success')
-    return render_template("home.html", user=current_user, final_res=final_res, job_dict=jobs_dict, job0=data1)
+    return render_template("prediction.html", user=current_user, final_res=final_res, job_dict=jobs_dict, job0=data1)

@@ -91,11 +91,11 @@
     </div>
   </div>
 </div>
-<form method="POST" name="RegistrationForm" id="RegistrationForm">
+<form method="POST" name="RegistrationForm" id="RegistrationForm" action="/register">
     <input type="hidden" id="userid" name="userid" value="{{ user.userId }}">
-    <h3 align="center">Registration</h3>
-    <h5 align="right">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Click Here</button>
+    <h3 align="center" style="color: #fff; font-weight: bold">Registration</h3>
+    <h5 align="right" style="color: #fff;">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><b>Click Here</b></button>
     to upload your Resume for Registration</h5>
     <div class="accordion">Personal Information</div>
     <div class="panel" style="border-bottom: 1px solid black;">
@@ -365,9 +365,10 @@
                             id="skills"
                             name="skills"
                             placeholder="Enter Skills"
-                            style="width: 100%; border: 1px solid #b3aaaa"
+                            style="width: 100%; border: 1px solid #b3aaaa; height: "
                             type="text"
                             value="{{ RegistrationForm.skills }}"
+                            size="10"
                     />
                 </div>
             </div>
@@ -396,6 +397,7 @@
                             style="width: 100%; border: 1px solid #b3aaaa"
                             type="text"
                             value="{{ RegistrationForm.ended }}"
+
                     />
                 </div>
                 </div>
@@ -454,7 +456,7 @@
 
     <br/><br/>
     <div align="center">
-        <button type="submit" class="btn btn-primary" style="float: center">Submit</button>
+        <button type="submit" class="btn btn-primary" style="float: center"><b>Submit</b></button>
     </div>
 
 </form>

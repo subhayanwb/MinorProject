@@ -212,25 +212,68 @@ def uploadfile():
         data = resumeparse.read_file(f.filename)
 
         form = RegistrationForm()
-        if data['name'].split()[0] != None:
-            form.firstname = data['name'].split()[0]
+
+        if(data['name']) != None:
+            if data['name'].split()[0] != None:
+                form.firstname = data['name'].split()[0]
+            else:
+                form.firstname = ""
         else:
             form.firstname = ""
-        if data['name'].split()[1] != None:
-            form.lastname = data['name'].split()[1]
+        if (data['name']) != None:
+            if data['name'].split()[1] != None:
+                form.lastname = data['name'].split()[1]
+            else:
+                form.lastname = ""
         else:
             form.lastname = ""
+
         if data['phone'] != None:
             form.contactnumber = data['phone']
         else:
             form.contactnumber = ""
-        if data['designition'] != None:
-            form.designition = data['designition']
+        form.dob = ""
+        form.city = ""
+        form.state = ""
+        form.country = ""
+        form.pin = ""
+        form.gender = ""
+
+        if data['degree'] != None:
+            degree = ', '.join(data['degree'])
+            form.qualification = degree
         else:
-            form.designition = ""
+            form.qualification = ""
+        if data['university'] != None:
+            institute = ', '.join(data['university'])
+            form.institute = institute
+        else:
+            form.institute = ""
+        form.yearofcompletion = ""
+        form.grade = ""
+        form.rating = ""
 
+        if data['Companies worked at'] != None:
+            organization = ', '.join(data['Companies worked at'])
+            form.organization = organization
+        else:
+            form.organization = ""
+        if data['designition'] != None:
+            designation = ', '.join(data['designition'])
+            form.designation = designation
+        else:
+            form.designation = ""
+        if data['skills'] != None:
+            skills = ', '.join(data['skills'])
+            form.skills = skills
+        else:
+            form.skills = ""
+        form.started = ""
+        form.ended = ""
 
-
+        form.certificatename = ""
+        form.duration = ""
+        form.completionyear = ""
 
         flash(data, category='success')
         flash('File Upload Successfull!', category='success')

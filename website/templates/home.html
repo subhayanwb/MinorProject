@@ -1,282 +1,362 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Registration{% endblock %} {% block content
 %}
-<div class="container">
-        <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Rate Yourself.....!!</h2>
+<style>
+            .outerDiv {
+                background-color: #eaf0f3;
+                color: #fff;
 
+                width: 100%;
+                margin: 1px auto;
+                padding: 1px;
+            }
+            .leftDiv {
+                background-color: #eaf0f3;
+                color: #000;
+
+                width: 60%;
+                float: left;
+            }
+            .rightDiv {
+                background-color: #eaf0f3;
+                color: #000;
+
+                width: 40%;
+                float: right;
+            }
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.4s;
+  font-weight: bolder
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.float-container {
+    margin: 10px;
+    padding: 2px;
+    float: left;
+    width: 100%
+}
+
+.float-child {
+    float: left;
+    padding: 2px;
+}
+.sub {
+    float: left
+}
+
+</style>
+
+
+    <h3 align="center" style="color: #fff; font-weight: bold">Profile</h3>
+    <h5 align="right" style="color: #fff;">
+    <a href="/rateyourself"><b>Click Here</b></a> to Rate yourself</h5>
+    <div class="" style="border-bottom: 1px solid black;">
+        <div class="outerDiv">
+            <div class="leftDiv" style="width: 50%; padding-right: 10px">
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                      <div class="sub"><b>First Name</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.firstname }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Date of Birth</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.dob }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>City</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.city }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Country</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.country }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Gender</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.gender }}</div>
+                  </div>
                 </div>
 
-
-                <div class="card-body">
-
-					<form  method="POST", action="{{url_for('views.rate')}}">
-
-						<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Database Fundamentals</label>
-							<div class="col-sm-9">
-							<select class="form-select form-control" required aria-label="select example" name="rate_Database Fundamentals" style="width: 20%">
-								  <option value="">Choose option</option>
-								 <option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-								</select>
-
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Computer Architecture</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Computer Architecture" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Distributed Computing Systems</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Distributed Computing Systems" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Cyber Security</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Cyber Security" style="width: 20%">
-							        <option value="" >Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Computer Networking</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Networking" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Software Development</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Development" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Programming Skills</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Programming Skills" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Project Management</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Project Management" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Computer Forensics Fundamentals</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Computer Forensics Fundamentals" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Technical Communication skills</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Technical Communication" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">AI ML</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_AI ML" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Software Engineering</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_se" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Business Analysis</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Business Analysis" style="width: 20%">
-							        <option disabled= "disabled" selected="selected">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Communication skills</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Communication skills" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3 col-form-label">Data Science</label>
-							<div class="col-sm-9">
-							 <select class="form-select form-control" required aria-label="select example" name="rate_Data Science" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-				</div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Troubleshooting skills</label>
-							<div class="col-sm-9">
-							 <select  class="form-control" name="rate_Troubleshooting skills" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-
-                </div>
-				<div class="form-group row">
-							<label  class="col-sm-3  col-form-label">Graphics Designing</label>
-							<div class="col-sm-9">
-							 <select  class="form-control" name="rate" style="width: 20%">
-							        <option value="">Choose option</option>
-									<option value="1">Not Interested</option>
-									<option value="2">Poor</option>
-									<option value="3">Beginner</option>
-									<option value="5">Average</option>
-									<option value="6">Intermediate</option>
-									<option value="7">Excellent</option>
-									<option value="9">Professional</option>
-							 </select>
-						    </div>
-
-                </div>
-                <div align="center">
-					<button type="submit" class="btn btn-primary" style="float: center">Submit</button>
-				</div>
-					</form>
-				</div>
 			</div>
-		</div>
-</div>
+            <div class="rightDiv" style="width: 50%">
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Last Name</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.lastname }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Contact Number</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.contactnumber }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>State</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.state }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>PIN</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.pin }}</div>
+                  </div>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="outerDiv">
+            <div class="leftDiv" style="width: 100%; padding-right: 10px">
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                      <div class="sub"><b>Qualification</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub">{{ RegistrationForm.qualification }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>College/University</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub">{{ RegistrationForm.institute }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Year Of Completion</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.yearofcompletion }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Grade</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.grade }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Rating</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.rating }}</div>
+                  </div>
+                </div>
+
+			</div>
+
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="outerDiv">
+            <div class="leftDiv" style="width: 100%; padding-right: 10px">
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                      <div class="sub"><b>Organization</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub">{{ RegistrationForm.organization }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Started On</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub">{{ RegistrationForm.started }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Quit On</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.yearofcompletion }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Designation</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub">{{ RegistrationForm.designation }}</div>
+                  </div>
+                </div>
+               <div class="float-container">
+                  <div class="float-child" style="width:22%">
+                    <div class="sub"><b>Skills</b></div>
+                  </div>
+                  <div class="float-child" style="width:5%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child">
+                    <div class="sub" style="cols:3"><p>{{ RegistrationForm.skills }}</p></div>
+                  </div>
+                </div>
+                <div style="clear: both;"></div>
+			</div>
+        </div>
+        <div class="outerDiv">
+            <div class="leftDiv" style="width: 50%; padding-right: 10px">
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                      <div class="sub"><b>Certificate</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.certificatename }}</div>
+                  </div>
+                </div>
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Duration</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.duration }}</div>
+                  </div>
+                </div>
+            </div>
+            <div class="rightDiv" style="width: 50%">
+                <div class="float-container">
+                  <div class="float-child" style="width:45%">
+                    <div class="sub"><b>Completion Year</b></div>
+                  </div>
+                  <div class="float-child" style="width:10%">
+                    <div class="sub"><b>:</b></div>
+                  </div>
+                  <div class="float-child" style="width:45%">
+                    <div class="sub">{{ RegistrationForm.completionyear }}</div>
+                  </div>
+                </div>
+            </div>
+           <div style="clear: both;"></div>
+        </div>
+
+    </div>
+
 {% endblock %}
+
+
