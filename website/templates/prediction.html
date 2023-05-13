@@ -1,8 +1,36 @@
 {% extends "base.html" %} {% block title %}Registration{% endblock %} {% block content
 %}
 
+<style>
+    .accordion {
+  background-color: #89b9e3;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.4s;
+  font-weight: bolder
+}
+</style>
+<br><br>
+<h3 align="center" style="color: #fff; font-weight: bold">Hey {{ userPersonalInfo.firstname }}! Here are the top job roles that matched your skills.....</h3><br><br>
+   <div class="accordion">You can choose your carrer as :<br><br>
+        <ol type="1" style="font-family: cursive">
+            <li>
+                {{ job0 }}
+            </li>
+             {%for key, value in final_res.items(): %}
+		        {%if job0!=job_dict[value]%}
+                <li class="bar bar2">{{job_dict[value]}}</li>
+
+		        {%endif%}
+	        {%endfor%}
+        </ol>
 
 
-
-
+   </div>
 {% endblock %}

@@ -275,6 +275,6 @@ def uploadfile():
         form.duration = ""
         form.completionyear = ""
 
-        flash(data, category='success')
+       # flash(data, category='success')
         flash('File Upload Successfull!', category='success')
         return render_template("registration.html", user=current_user, data=data, RegistrationForm=form)

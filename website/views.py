@@ -93,6 +93,7 @@ def rateyourself():
 def predict():
     if request.method == 'POST':
         result = request.form
+        #flash(result, category="success")
         i = 0
         print(result)
         res = result.to_dict(flat=True)
@@ -161,5 +162,5 @@ def predict():
         data1 = predictions[0]
         print(data1)
         #return render_template("testafter.html", final_res=final_res, job_dict=jobs_dict, job0=data1)
-        flash(final_res[0], category='success')
-    return render_template("prediction.html", user=current_user, final_res=final_res, job_dict=jobs_dict, job0=data1)
+        userPersonalInfo = UserPersonalInfo.query.filter_by(userid=current_user.userId).first()
+    return render_template("prediction.html", user=current_user, final_res=final_res, job_dict=jobs_dict, job0=data1, userPersonalInfo=userPersonalInfo)
