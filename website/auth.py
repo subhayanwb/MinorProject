@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 
-from .models import User, UserPersonalInfo, CollegeMaster, QualificationMaster, UserEducationInfo, UserExperienceInfo, \
-    UserCertificateInfo
+from .models import User, UserPersonalInfo, CollegeMaster, QualificationMaster, UserEducationInfo, UserExperienceInfo, UserCertificateInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db  ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -23,12 +22,12 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                if user.registrationCompleted != 100:
+                if user.registrationCompleted != 'Y':
                     flash('Your Registration has not completed yet. Please fill in this form to complete Registration.',
                           category='error')
                     return redirect(url_for('auth.register'))
                 else:
-                    return redirect(url_for('view.home'))
+                    return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -82,14 +81,15 @@ def register():
                                                   contactnumber=form.contactnumber.data, city=form.city.data,
                                                   state=form.state.data, country=form.country.data, pin=form.pin.data,
                                                   gender=form.gender.data)
-        new_user_education_info = UserEducationInfo(userid=form.userid.data, qualificationid=form.qualification.data,
-                                                  collegeid=form.institute.data,
+        new_user_education_info = UserEducationInfo(userid=form.userid.data, qualification=form.qualification.data,
+                                                  college=form.institute.data,
                                                   yearofcompletion=form.yearofcompletion.data,
                                                   grade=form.grade.data, rating=form.rating.data)
         new_user_experience_info = UserExperienceInfo(userid=form.userid.data, organization=form.organization.data,
                                                     started=form.started.data,
                                                     ended=form.ended.data,
-                                                    designation=form.designation.data)
+                                                    designation=form.designation.data,
+                                                      skills=form.skills.data)
         new_user_certificate_info = UserCertificateInfo(userid=form.userid.data,
                                                         certificatename=form.certificatename.data,
                                                         duration=form.duration.data,
@@ -98,6 +98,9 @@ def register():
         db.session.merge(new_user_education_info)
         db.session.merge(new_user_experience_info)
         db.session.merge(new_user_certificate_info)
+        user = User.query.filter_by(userId=current_user.userId).first()
+        user.registrationCompleted = 'Y'
+        db.session.merge(user)
         db.session.commit()
         flash('Data successfully saved!', category='success')
         return redirect(url_for('auth.register'))
@@ -109,6 +112,7 @@ def register():
         userEducationInfo = UserEducationInfo.query.filter_by(userid=current_user.userId).first()
         userExperienceInfo = UserExperienceInfo.query.filter_by(userid=current_user.userId).first()
         userCertificateInfo = UserCertificateInfo.query.filter_by(userid=current_user.userId).first()
+
         form = RegistrationForm()
         if None != userPersonalInfo:
             form.firstname = userPersonalInfo.firstname
@@ -133,8 +137,8 @@ def register():
             form.gender = ""
 
         if None != userEducationInfo:
-            form.qualification = userEducationInfo.qualificationid
-            form.institute = userEducationInfo.collegeid
+            form.qualification = userEducationInfo.qualification
+            form.institute = userEducationInfo.college
             form.yearofcompletion = userEducationInfo.yearofcompletion
             form.grade = userEducationInfo.grade
             form.rating = userEducationInfo.rating
@@ -150,11 +154,13 @@ def register():
             form.started = userExperienceInfo.started
             form.ended = userExperienceInfo.ended
             form.designation = userExperienceInfo.designation
+            form.skills = userExperienceInfo.skills
         else:
             form.organization = ""
             form.started = ""
             form.ended = ""
             form.designation = ""
+            form.skills = ""
 
         if None != userCertificateInfo:
             form.certificatename = userCertificateInfo.certificatename
@@ -190,6 +196,7 @@ class RegistrationForm(Form):
     started = StringField('started')
     ended = StringField('ended')
     designation = StringField('designation')
+    skills = StringField('skills')
 
     certificatename = StringField('certificatename')
     duration = StringField('duration')
@@ -203,6 +210,28 @@ def uploadfile():
         f.save(secure_filename(f.filename))
 
         data = resumeparse.read_file(f.filename)
+
+        form = RegistrationForm()
+        if data['name'].split()[0] != None:
+            form.firstname = data['name'].split()[0]
+        else:
+            form.firstname = ""
+        if data['name'].split()[1] != None:
+            form.lastname = data['name'].split()[1]
+        else:
+            form.lastname = ""
+        if data['phone'] != None:
+            form.contactnumber = data['phone']
+        else:
+            form.contactnumber = ""
+        if data['designition'] != None:
+            form.designition = data['designition']
+        else:
+            form.designition = ""
+
+
+
+
         flash(data, category='success')
         flash('File Upload Successfull!', category='success')
-        return redirect(url_for('auth.register'))
+        return render_template("registration.html", user=current_user, data=data, RegistrationForm=form)

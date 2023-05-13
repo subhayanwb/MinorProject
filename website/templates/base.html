@@ -17,22 +17,24 @@
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-  <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark" style="background-color: #2a5b8b; height: 45px;">
+  <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark" style="background-color: #2a5b8b; height: 60px;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-          <img src="/static/images/Logo.png" height="30" width="40">
-          <span style="margin-left: 20px; font-style: italic; font-size: x-large; color: #a9b0da;">Career Guide</span>
-      </a>
+      <!--<a class="navbar-brand" href="#">
+
+      </a>-->
+        <span><img src="/static/images/Logo.png" height="50" width="50"></span>
+        <span style="margin-left: 20px; font-style: italic; font-size: 30px; color: #a9b0da;">AI Based Career Guide</span>
     </div>
 
-        <div class="navbar-nav">
+        <div class="navbar-nav" style="color: #fff; font-size: 18px; padding: 30px; font-style: italic; ">
           {% if user.is_authenticated %}
-            {%  if user.registrationCompleted == 100:%}
-              <b><a class="nav-item nav-link" id="home" href="/">Home</a>
-              <a class="nav-item nav-link" id="logout" href="/logout">Logout</a></b>
+            {%  if user.registrationCompleted == 'Y' %}
+             <span><a class="nav-item" id="home" href="/" style="padding-right: 30px">Home</a>
+              <a class="nav-item" id="register" href="/register" style="padding-right: 20px">Registration</a>
+                 <a class="nav-item" id="logout" href="/logout" style="padding-right: 20px">Logout</a></span>
             {%  else %}
-                <b><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></b>
+                <b><a class="nav-item nav-link" id="logout" href="/logout" style="padding-right: 20px">Logout</a></b>
             {%  endif %}
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">
