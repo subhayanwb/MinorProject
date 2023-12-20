@@ -7,30 +7,81 @@
   color: #444;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 18px;
+  font-size: 13px;
   transition: 0.4s;
-  font-weight: bolder
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 60%;
+  padding: 10px;
+
+}
+.column2 {
+  float: left;
+  width: 40%;
+  padding: 10px;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>
-<br><br>
-<h3 align="center" style="color: #fff; font-weight: bold">Hey {{ userPersonalInfo.firstname }}! Here are the top job roles that matched your skills.....</h3><br><br>
-   <div class="accordion">You can choose your carrer as :<br><br>
-        <ol type="1" style="font-family: cursive">
-            <li>
-                {{ job0 }}
-            </li>
-             {%for key, value in final_res.items(): %}
-		        {%if job0!=job_dict[value]%}
-                <li class="bar bar2">{{job_dict[value]}}</li>
-
-		        {%endif%}
-	        {%endfor%}
-        </ol>
 
 
+<h3 align="center" style="color: #fff; font-weight: bold; font-size: 15px">Hey {{ userPersonalInfo.firstname }}! Here are the top job roles that matched your skills and predicted by ML Algorithms.....</h3><br>
+
+<div class="row">
+  <div class="column1">
+    <div class="accordion">Prediction by <u style="font-style: italic">KNN Algorithm</u> <b style="color: #090e66">(Accuracy = {{knn_accuracy}})</b> :<br><br>
+        <p style="font-family: cursive">
+            {{ knn_finalResults }}
+        </p>
+     </div>
+    <div class="accordion">Prediction by <u style="font-style: italic">SVM Algorithm</u> <b style="color: #090e66">(Accuracy = {{svm_accuracy}})</b> :<br><br>
+        <p style="font-family: cursive">
+            {{ svm_finalResults }}
+        </p>
+     </div>
+    <div class="accordion">Prediction by <u style="font-style: italic">Ensemble Voting Algorithm</u> <br>[Logistic Regression, Decision Tree & Random Forest] <b style="color: #090e66">(Accuracy = {{voting_accuracy}})</b> :<br><br>
+        <p style="font-family: cursive">
+            {{ voting_finalResults }}
+        </p>
    </div>
+    <div class="accordion">Prediction by <u style="font-style: italic">Ensemble Bagging Algorithm</u> <b style="color: #090e66">(Accuracy = {{bagging_accuracy}})</b> :<br><br>
+        <p style="font-family: cursive">
+            {{ bagging_finalResults }}
+        </p>
+    </div>
+  </div>
+  <div class="column2">
+    <div class="accordion" style="height: 486px">Input provided:<br>
+        <ol type="1" style="font-family: cursive">
+            {% for key, value in input_data.items(): %}
+		        <li>
+                    <table>
+                        <tr style="width: 100%; vertical-align: baseline">
+                            <td style="width: 50%">{{key}}</td>
+                            <td style="width: 2%">:</td>
+                            <td style="width: 40%">{{value}}</td>
+                        </tr>
+                    </table>
+            {% endfor %}
+        </ol>
+    </div>
+  </div>
+</div>
 {% endblock %}
