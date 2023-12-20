@@ -29,14 +29,14 @@
 
       </a>-->
         <span><img src="/static/images/Logo.png" height="50" width="80"></span>
-        <span style="margin-left: 20px; font-style: italic; font-size: 35px; color: #fff; font-family: Audiowide">AI Based Career Guide</span>
+        <span style="margin-left: 20px; font-style: italic; font-size: 30px; color: #fff; font-family: Audiowide">AI Based Career Guide</span>
     </div>
 
         <div class="navbar-nav" style="color: #fff; font-size: 18px; padding: 30px; font-style: italic; ">
           {% if user.is_authenticated %}
-            <span style="padding-right: 100px; color: chartreuse">Logged in as : {{current_user.email}}</span>
+            <span style="padding-right: 100px; color: chartreuse; font-size: 12px;">Logged in as : {{current_user.email}}</span>
             {%  if user.registrationCompleted == 'Y' %}
-             <span><a class="nav-item" id="home" href="/" style="padding-right: 30px">Home</a>
+             <span><a class="nav-item" id="home" href="/home" style="padding-right: 30px">Home</a>
               <a class="nav-item" id="register" href="/register" style="padding-right: 20px">Registration</a>
                  <a class="nav-item" id="logout" href="/logout" style="padding-right: 20px">Logout</a></span>
             {%  else %}

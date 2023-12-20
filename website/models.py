@@ -7,7 +7,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'user_login_info'
     userId = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(45), unique=True)
-    password = db.Column(db.String(150))
+    password = db.Column(db.String(250))
     role = db.Column(db.String(20))
     registrationCompleted = db.Column(db.String(1))
 

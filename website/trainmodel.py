@@ -5,10 +5,7 @@ career = pd.read_csv('testdata.data', header = None)
 #np.dtype('float64')
 
 X = np.array(career.iloc[:, 0:17]) #X is skills
-print(X)
 y = np.array(career.iloc[:, 17]) #Y is Roles
-print("hi")
-print(y)
 
 ##  attribute to return the column labels of the given Dataframe
 career.columns = ["Database Fundamentals","Computer Architecture","Distributed Computing Systems",
@@ -28,12 +25,11 @@ scores = {}
 knn = KNeighborsClassifier(n_neighbors=5)
 
 knn.fit(X_train, y_train)
-print('X_train',X_train)
-print('y_train',y_train)
 y_pred = knn.predict(X_test)
+print('Test data:',X_test)
+print('y_test', y_test)
 print('y_pred',y_pred)
 scores[5] = metrics.accuracy_score(y_test, y_pred)
 print('Accuracy=',scores[5]*100)
 
 pickle.dump(knn, open('careerlast.pkl','wb'))
-print('test file created')

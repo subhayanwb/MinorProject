@@ -11,6 +11,31 @@ from resume_parser import resumeparse
 auth = Blueprint('auth', __name__)
 
 
+@auth.route('/', methods=['GET', 'POST'])
+def start():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Logged in successfully!', category='success')
+                login_user(user, remember=True)
+                if user.registrationCompleted != 'Y':
+                    flash('Your Registration has not completed yet. Please fill in this form to complete Registration.',
+                          category='error')
+                    return redirect(url_for('auth.register'))
+                else:
+                    return redirect(url_for('views.home'))
+            else:
+                flash('Incorrect password, try again.', category='error')
+        else:
+            flash('Email does not exists. Please Sign Up to gain access to this site.', category='error')
+
+    return render_template("login.html", user=current_user)
+
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -60,7 +85,7 @@ def signup():
         elif len(password1) < 2:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            new_user = User(email=email, password=generate_password_hash(password1, method='sha256'),
+            new_user = User(email=email, password=generate_password_hash(password1, method='scrypt'),
                             role='User', registrationCompleted='N')
             db.session.add(new_user)
             db.session.commit()
@@ -210,7 +235,7 @@ def uploadfile():
         f.save(secure_filename(f.filename))
 
         data = resumeparse.read_file(f.filename)
-
+        print(data)
         form = RegistrationForm()
 
         if(data['name']) != None:
